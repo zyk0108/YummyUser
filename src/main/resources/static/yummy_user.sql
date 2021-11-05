@@ -44,7 +44,7 @@ CREATE TABLE `notification`
     `id`         bigint UNSIGNED                                       NOT NULL AUTO_INCREMENT,
     `uid`        bigint UNSIGNED                                       NOT NULL,
     `raw`        text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-    `created_at` timestamp                                             NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+    `created_at` timestamp                                             NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     INDEX `idx_uid` (`uid`)
 ) ENGINE = InnoDB
@@ -61,7 +61,7 @@ CREATE TABLE `friend_request`
     `id`         bigint UNSIGNED NOT NULL AUTO_INCREMENT,
     `from_uid`   bigint UNSIGNED NOT NULL,
     `to_uid`     bigint UNSIGNED NOT NULL,
-    `created_at` timestamp       NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+    `created_at` timestamp       NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     INDEX `idx_from_uid_to_uid` (`from_uid`, `to_uid`)
 ) ENGINE = InnoDB
@@ -95,7 +95,7 @@ CREATE TABLE `moment`
     `uid`        bigint UNSIGNED                                       NOT NULL,
     `access`     tinyint                                               NOT NULL,
     `raw`        text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-    `created_at` timestamp                                             NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+    `created_at` timestamp                                             NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     INDEX `idx_uid_access` (`uid`, `access`)
 ) ENGINE = InnoDB
@@ -113,7 +113,7 @@ CREATE TABLE `feed`
     `from_uid`   bigint UNSIGNED NOT NULL,
     `to_uid`     bigint unsigned NOT NULL,
     `moment_id`  bigint UNSIGNED NOT NULL,
-    `created_at` timestamp       NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+    `created_at` timestamp       NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     INDEX `idx_to_id` (`to_uid`)
 ) ENGINE = InnoDB
@@ -175,12 +175,12 @@ CREATE TABLE `single_chat`
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message`
 (
-    `id`         bigint                                                NOT NULL,
-    `session_id` bigint                                                NOT NULL,
-    `uid`        bigint                                                NOT NULL,
-    `seq_id`     bigint                                                NOT NULL,
+    `id`         bigint UNSIGNED                                       NOT NULL AUTO_INCREMENT,
+    `session_id` bigint UNSIGNED                                       NOT NULL,
+    `uid`        bigint UNSIGNED                                       NOT NULL,
+    `seq_id`     bigint UNSIGNED                                       NOT NULL,
     `raw`        text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-    `created_at` timestamp                                             NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+    `created_at` timestamp                                             NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     unique INDEX `uidx_session_user_seq` (`session_id`, `uid`, `seq_id`),
     INDEX `uidx_session` (`session_id`) /* id 作为二级索引的一部分，有序的 */
