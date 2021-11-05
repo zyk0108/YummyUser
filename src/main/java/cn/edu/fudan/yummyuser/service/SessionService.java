@@ -46,7 +46,10 @@ public class SessionService {
                     return null;
                 }
                 Long sessionId = result.getId();
-                singleChatMapper.insertSingleChat(uidA, uidB, sessionId);
+                if (singleChatMapper.insertSingleChat(uidA, uidB, sessionId) == 0) {
+                    canCommit = false;
+                    return null;
+                }
                 final Member memberA = new Member(), memberB = new Member();
                 memberA.setSessionId(sessionId);
                 memberA.setUid(uidA);
