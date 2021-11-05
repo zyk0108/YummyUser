@@ -13,9 +13,9 @@ public interface IMessageMapper {
     @Insert({
             "<script>",
             "INSERT ignore INTO message (session_id, uid, seq_id, raw) ",
-            "VALUES " +
-                    "<foreach ='item' collection='messages' open='' separator=',' close=''>" +
-                    "( #{item.sessionId}, #{item.uid}, #{item.seqId}, #{item.raw} )" +
+            "VALUES " ,
+                    "<foreach item='item' collection='messages' open='' separator=',' close=''>" ,
+                    "( #{item.sessionId}, #{item.uid}, #{item.seqId}, #{item.raw} )" ,
                     "</foreach>",
             "</script>"
     })

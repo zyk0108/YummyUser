@@ -13,7 +13,7 @@ public interface IMemberMapper {
             "<script>",
             "INSERT ignore INTO member (session_id, uid) ",
             "VALUES " +
-                    "<foreach ='item' collection='members' open='' separator=',' close=''>" +
+                    "<foreach item='item' collection='members' open='' separator=',' close=''>" +
                     "( #{item.sessionId}, #{item.uid} )" +
                     "</foreach>",
             "</script>"
