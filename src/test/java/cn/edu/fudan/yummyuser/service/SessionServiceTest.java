@@ -12,6 +12,7 @@ class SessionServiceTest {
 
     @Test
     void openSession() {
-        sessionService.openSession(1L,2L);
+        sessionService.openSession(1L, 2L);
     }
+
 }

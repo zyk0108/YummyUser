@@ -3,9 +3,9 @@ package cn.edu.fudan.yummyuser.domain;
 
 import lombok.Data;
 
-@Data
+@Data(staticConstructor = "of")
 public class SessionState {
-    private Long sessionId;
-    private Long unread;
-    private Message lastMessage;
+    private final Long sessionId;
+    private final Long unread;
+    private final Message lastMessage;
 }
