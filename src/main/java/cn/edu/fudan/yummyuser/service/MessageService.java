@@ -32,8 +32,12 @@ public class MessageService {
         return res;
     }
 
-    public List<Message> pollMessages(Long sessionId, Long lastId, int limit) {
-        return messageMapper.selectMessages(sessionId, lastId, limit);
+    public List<Message> pollMessagesAsc(Long sessionId, Long firstId, int limit) {
+        return messageMapper.selectMessagesAsc(sessionId, firstId, limit);
+    }
+
+    public List<Message> pollMessagesDesc(Long sessionId, Long lastId, int limit) {
+        return messageMapper.selectMessagesDesc(sessionId, lastId, limit);
     }
 
 }

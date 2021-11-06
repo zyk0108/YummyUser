@@ -25,6 +25,10 @@ public interface IMessageMapper {
 
     @Select("select id, session_id as sessionId, uid, seq_id as seqId, raw, created_at as createdAt from message " +
             "where session_id = #{sessionId} and id <= #{lastId} order by id desc limit #{limit}")
-    List<Message> selectMessages(Long sessionId, Long lastId, int limit);
+    List<Message> selectMessagesDesc(Long sessionId, Long lastId, int limit);
+
+    @Select("select id, session_id as sessionId, uid, seq_id as seqId, raw, created_at as createdAt from message " +
+            "where session_id = #{sessionId} and id >= #{firstId} order by id asc limit #{limit}")
+    List<Message> selectMessagesAsc(Long sessionId, Long firstId, int limit);
 
 }
